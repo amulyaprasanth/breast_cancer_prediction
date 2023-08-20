@@ -13,6 +13,7 @@ list_of_files = [
     "src/pipelines/train_pipeline.py",
     "src/pipelines/predict_pipeline.py",
     "src/exception.py",
+    "src/logger.py",
     "src/utils.py",
     "requirements.txt",
     "setup.py",
