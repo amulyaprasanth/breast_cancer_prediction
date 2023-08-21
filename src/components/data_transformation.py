@@ -7,20 +7,19 @@ from dataclasses import dataclass
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 
-from src.components.data_ingestion import DataIngestion
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
 
 @dataclass
 class DataTransforamtionConfig:
-    preprocessor_obj_path = os.path.join('artifacts', 'preprocessor_obj.pkl')
+    preprocessor_obj_path = os.path.join('artifacts', 'preprocessor.pkl')
     
 class DataTransformation:
     def __init__(self) -> None:
         self.data_transformation_config = DataTransforamtionConfig()
         
-    def get_preprocessor(self):
+    def get_preprocessor_obj(self):
         try:
             num_features = ['smoothness_mean',
                                 'symmetry_mean',
@@ -62,7 +61,7 @@ class DataTransformation:
             
             logging.info("Getting preprocessor object")
             
-            preprocessor_obj = self.get_preprocessor()
+            preprocessor_obj = self.get_preprocessor_obj()
             label_enc = LabelEncoder()
             
             target_column = "diagnosis"
@@ -82,7 +81,7 @@ class DataTransformation:
             target_feature_test_arr = label_enc.transform(target_feature_test_df)
             
             train_arr = np.c_[input_features_train_arr, target_feature_train_arr]
-            test_arr = np.c_[input_features_train_arr, target_feature_test_arr]
+            test_arr = np.c_[input_feature_test_arr, target_feature_test_arr]
             
             logging.info("Applying preprocessing object to training and testing data")
             
@@ -90,9 +89,10 @@ class DataTransformation:
             save_object(self.data_transformation_config.preprocessor_obj_path, preprocessor_obj)
 
             return (
-                self.data_transformation_config.preprocessor_obj_path,
                 train_arr,
-                test_arr
+                test_arr,
+                self.data_transformation_config.preprocessor_obj_path
+
             )
         except Exception as e:
             raise CustomException(e, sys)
