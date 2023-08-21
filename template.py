@@ -5,6 +5,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format="[% (asctime)s]: %(message)s:")
 
 list_of_files = [
+    "data/empty_data.csv",
     "src/__init__.py",
     "src/components/__init__.py",
     "src/components/data_ingestion.py",
