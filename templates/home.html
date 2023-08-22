@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breast Cancer Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    .button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Breast Cancer Feature Inputs</h1>
+  <form id="feature_form" action="{{url_for('predict_datapoint')}}", method="POST">
+    <label for="smoothness_mean">Smoothness Mean:</label>
+    <input type="number" id="smoothness_mean" name="smoothness_mean"  value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="symmetry_mean">Symmetry Mean:</label>
+    <input type="number" id="symmetry_mean" name="symmetry_mean" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="fractal_dimension_mean">Fractal Dimension Mean:</label>
+    <input type="number" id="fractal_dimension_mean" name="fractal_dimension_mean" value = 0 step="0.001" min="0" max="0.5"
+      required>
+
+    <label for="texture_se">Texture SE:</label>
+    <input type="number" id="texture_se" name="texture_se" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="smoothness_se">Smoothness SE:</label>
+    <input type="number" id="smoothness_se" name="smoothness_se" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="compactness_se">Compactness SE:</label>
+    <input type="number" id="compactness_se" name="compactness_se" value = 0 step="0.001" min="0" max="0.2" required>
+
+    <label for="concavity_se">Concavity SE:</label>
+    <input type="number" id="concavity_se" name="concavity_se" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="concave_points_se">Concave Points SE:</label>
+    <input type="number" id="concave_points_se" name="concave_points_se" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="symmetry_se">Symmetry SE:</label>
+    <input type="number" id="symmetry_se" name="symmetry_se" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="fractal_dimension_se">Fractal Dimension SE:</label>
+    <input type="number" id="fractal_dimension_se" name="fractal_dimension_se" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="smoothness_worst">Smoothness Worst:</label>
+    <input type="number" id="smoothness_worst" name="smoothness_worst" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="symmetry_worst">Symmetry Worst:</label>
+    <input type="number" id="symmetry_worst" name="symmetry_worst" value = 0 step="0.001" min="0" max="0.5" required>
+
+    <label for="fractal_dimension_worst">Fractal Dimension Worst:</label>
+    <input type="number" id="fractal_dimension_worst" name="fractal_dimension_worst" value = 0 step="0.001" min="0" max="0.5"
+      required>
+
+    <input type="submit" class="button">
+    <input type="reset" class="button">
+  </form>
+
+  <h1>Your Prediction is {{results}}</h1>
+
+</body>
+
+</html>
